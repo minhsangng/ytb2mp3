@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -32,26 +33,26 @@
 
 <body class="bg-[var(--fourty-color)]">
     <div
-        class="bg-[var(--primary-color)] h-[60vh] flex justify-center items-end drop-shadow-2xl drop-shadow-(var(--thirty-color)) rounded-bl-2xl rounded-br-[11rem]">
-        <form action="/convert-mp3" method="POST" id="form" class="w-[50%] mx-auto pb-4">
+        class="bg-[var(--primary-color)] h-[60vh] flex justify-center items-end drop-shadow-2xl drop-shadow-(var(--thirty-color)) rounded-bl-2xl lg:rounded-br-[11rem] rounded-br-[6rem]">
+        <form action="/convert-mp3" method="POST" id="form" class="lg:w-[50%] w-[80%] mx-auto lg:pb-4 pb-14">
             <h1 class="flex flex-col items-center gap-y-4 font-bold text-3xl text-[var(--thirty-color)]"><i
                     class="fa-brands fa-youtube text-7xl text-red-600 animate-bounce"></i>Youtube to MP3 Convert</h1>
             <h4 class="text-center mt-8 text-white">Dán đường dẫn video từ Youtube:</h4>
             <div class="mt-4 flex justify-between gap-x-2">
                 <input type="text" name="videoID" placeholder="Video URL"
-                    class="w-full border border-[var(--secondary-color)] outline-2 outline-[var(--secondary-color)] rounded-md px-6 py-3 text-base">
+                    class="w-full border border-[var(--secondary-color)] outline-2 outline-[var(--secondary-color)] rounded-md px-6 lg:py-3 py-2 lg:text-base text:sm">
                 <button type="submit"
-                    class="w-40 bg-[var(--secondary-color)] text-white text-xl rounded-md opacity-75 hover:opacity-100 transition-all ease-linear">Chuyển
+                    class="w-40 bg-[var(--secondary-color)] text-white lg:text-xl text:lg rounded-md opacity-75 hover:opacity-100 transition-all ease-linear">Chuyển
                     đổi</button>
             </div>
         </form>
     </div>
-    <div id="loading" class="w-[50%] mx-auto my-4 h-6 relative">
+    <div id="loading" class="lg:w-[50%] w-[80%] mx-auto my-4 h-6 relative">
         <div id="bar" class="h-full w-0 bg-green-500 rounded-sm transition-all ease-linear"></div>
         <span id="percent"
             class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ease-linear text-white"></span>
     </div>
-    <div class="w-[50%] mx-auto pt-8">
+    <div class="lg:w-[50%] w-[80%] mx-auto pt-8">
         <% if(typeof success !="undefined" && success) { %>
             <div class="success text-center text-green-500">
                 <p class="mb-4">
