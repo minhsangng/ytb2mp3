@@ -54,12 +54,13 @@
     </div>
     <div class="lg:w-[50%] w-[80%] mx-auto pt-8">
         <% if(typeof success !="undefined" && success) { %>
-            <div class="success text-center text-green-500">
+            <div class="success text-center text-green-500 flex flex-col items-center">
                 <p class="mb-4">
                     <%= song_title %>
                 </p>
-                <a href="<%= song_link %>"><button
-                        class="px-6 py-2 bg-[var(--thirty-color)] text-white rounded-md">Tải xuống</button></a>
+                <a href="<%= song_link %>"><button class="px-6 py-2 bg-[var(--thirty-color)] text-white rounded-md">Tải
+                        xuống</button></a>
+                <a href="/" class="mt-8 text-gray-400 border-t border-[var(--secondary-color)] w-fit text-center pt-4">Chuyển đổi tệp khác</a>
             </div>
             <% } else if(typeof success !="undefined" && !success) { %>
                 <div class="error text-center text-red-500">
@@ -79,7 +80,7 @@
         form.addEventListener("submit", function (e) {
             e.preventDefault();
             loading.style.display = "block";
-            
+
             let width = 0;
             let percentLoading = 0;
             percent.textContent = percentLoading + "%";
