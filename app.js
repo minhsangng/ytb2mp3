@@ -20,9 +20,15 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+function getYouTubeID(url) {
+  let baseUrl = url.split("?")[0];
+  let parts = baseUrl.split("/");
+  return parts[parts.length - 1];
+}
+
 app.post("/convert-mp3", async (req, res) => {
   try {
-    const videoId = req.body.videoID;
+    const videoId = getYouTubeID(req.body.videoID);
 
     if (videoId === undefined || videoId === "" || videoId === null) {
       return res.render("index", {

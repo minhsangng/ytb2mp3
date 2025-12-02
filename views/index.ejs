@@ -1,35 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>YTB to MP3 Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --primary-color: #3291B6;
+            --secondary-color: #BB8ED0;
+            --thirty-color: #E0A8A8;
+            --fourty-color: #F1E2E2;
+        }
+
+        @font-face {
+            font-family: "GochiHand";
+            src: url("/fonts/DFVN-GochiHand.ttf") format("truetype");
+        }
+
+        * {
+            font-family: "GochiHand";
+        }
+    </style>
 </head>
-<body>
-    <div class="top-container">
-        <form action="/convert-mp3" method="POST" id="form">
-            <h1><i class="fa-brands fa-youtube"></i>Youtube to MP3 Convert</h1>
-            <h4>Enter URL</h4>
-            <div>
-                <input type="text" name="videoID" placeholder="Video ID">
-                <button id="convert-button">Convert</button>
+
+<body class="bg-[var(--fourty-color)]">
+    <div
+        class="bg-[var(--primary-color)] h-[60vh] flex justify-center items-end drop-shadow-2xl drop-shadow-(var(--thirty-color)) rounded-bl-2xl rounded-br-[11rem]">
+        <form action="/convert-mp3" method="POST" id="form" class="w-[50%] mx-auto pb-4">
+            <h1 class="flex flex-col items-center gap-y-4 font-bold text-3xl text-[var(--thirty-color)]"><i
+                    class="fa-brands fa-youtube text-7xl text-red-600 animate-bounce"></i>Youtube to MP3 Convert</h1>
+            <h4 class="text-center mt-8 text-white">Dán đường dẫn video từ Youtube:</h4>
+            <div class="mt-4 flex justify-between gap-x-2">
+                <input type="text" name="videoID" placeholder="Video URL"
+                    class="w-full border border-[var(--secondary-color)] outline-2 outline-[var(--secondary-color)] rounded-md px-6 py-3 text-base">
+                <button type="submit"
+                    class="w-40 bg-[var(--secondary-color)] text-white text-xl rounded-md opacity-75 hover:opacity-100 transition-all ease-linear">Chuyển
+                    đổi</button>
             </div>
         </form>
     </div>
-    <div class="bottom-container">
-        <% if(typeof success != "undefined" && success) { %>
-            <div class="success">
-            <p><%= song_title %></p>
-            <a href="<%= song_link %>"><button id="download-btn">DOWNLOAD</button></a>
-            </div>
-        <% } else if(typeof success != "undefined" && !success) { %>
-            <div class="error">
-                <p><%= message %></p>
-            </div>
-        <% } %>
+    <div id="loading" class="w-[50%] mx-auto my-4 h-6 relative">
+        <div id="bar" class="h-full w-0 bg-green-500 rounded-sm transition-all ease-linear"></div>
+        <span id="percent"
+            class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all ease-linear text-white"></span>
     </div>
+    <div class="w-[50%] mx-auto pt-8">
+        <% if(typeof success !="undefined" && success) { %>
+            <div class="success text-center text-green-500">
+                <p class="mb-4">
+                    <%= song_title %>
+                </p>
+                <a href="<%= song_link %>"><button
+                        class="px-6 py-2 bg-[var(--thirty-color)] text-white rounded-md">Tải xuống</button></a>
+            </div>
+            <% } else if(typeof success !="undefined" && !success) { %>
+                <div class="error text-center text-red-500">
+                    <p>
+                        <%= message %>
+                    </p>
+                </div>
+                <% } %>
+    </div>
+
+    <script>
+        const form = document.getElementById("form");
+        const loading = document.getElementById("loading");
+        const bar = document.getElementById("bar");
+        const percent = document.getElementById("percent");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            loading.style.display = "block";
+            
+            let width = 0;
+            let percentLoading = 0;
+            percent.textContent = percentLoading + "%";
+
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    percent.textContent = "Đã xong";
+                    clearInterval(interval);
+                    form.submit();
+                } else {
+                    width += 2;
+                    percentLoading += 2;
+                    bar.style.width = width + "%";
+                    percent.textContent = percentLoading + "%";
+                }
+            }, 100);
+        });
+    </script>
+
 </body>
+
 </html>
