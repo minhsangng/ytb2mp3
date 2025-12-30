@@ -1,10 +1,13 @@
 const express = require("express");
 const fetch = require("node-fetch");
+import cronJob from "./cron.js";
 require("dotenv").config();
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+
+cronJob.start();
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
