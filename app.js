@@ -1,6 +1,6 @@
 const express = require("express");
 const fetch = require("node-fetch");
-import cronJob from "./cron.js";
+const cronJob = require("./cron");
 require("dotenv").config();
 
 const app = express();
